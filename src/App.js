@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import Dashboard from "./pages/dashboard";
+import Layout from "./components/layout";
+import Login from "./components/login";
+import BrandAdd from "./pages/brand/brandAdd";
+
+
+function App(history) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes history={history}>
+        <Route path="/" element={<Layout hideHeaderPaths={["/login","/"]} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/brand-add" element={<BrandAdd />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="*" element={<NoPage />} /> */}
+        </Route>
+        
+      </Routes>
+    </BrowserRouter>
   );
 }
 
